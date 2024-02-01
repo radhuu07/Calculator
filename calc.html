@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <meta name="description" content="Calculator App">
+    <link rel="stylesheet" href="css/calc.css">
+    <style>
+        .iphone {
+            width: 375px;
+            height: 667px;
+            background-color: #ffffff;
+            border-radius: 40px;
+            margin: 50px auto;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .screen {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 40px;
+            position: relative;
+            background-color: #e8e8e8;
+            background-image: url(/img/HD-wallpaper-iphone-14-pro-thumbnail.jpg);
+        }
+        
+        .content {
+            padding: 40px;
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            margin-top: 150px;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        #calculator {
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 300px;
+        }
+        
+        #display {
+            height: 50px;
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 10px;
+            font-size: 1.5em;
+        }
+        
+        #buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        button {
+            padding: 15px;
+            font-size: 1.2em;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            background-color: #fff;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #e6e6e6;
+        }
+        
+        button.operator {
+            background-color: #ffa500;
+            color: #fff;
+        }
+        
+        button.operator:hover {
+            background-color: #ff8c00;
+        }
+        
+        button.double {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="iphone">
+            <div class="screen">
+                <div class="content">
+                    <h1>CALCULATOR</h1>
+                    <div id="calculator">
+                        <div id="display"></div>
+                        <div id="buttons">
+                            <button>7</button>
+                            <button>8</button>
+                            <button>9</button>
+                            <button class="operator">/</button>
+
+                            <button>4</button>
+                            <button>5</button>
+                            <button>6</button>
+                            <button class="operator">*</button>
+
+                            <button>1</button>
+                            <button>2</button>
+                            <button>3</button>
+                            <button class="operator">-</button>
+
+                            <button class="double">0</button>
+                            <button>.</button>
+                            <button class="operator">+</button>
+                            <button class="operator double" onclick="calculate()">=</button>
+                            <button class="double" onclick="clearDisplay()">‎ </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        let display = document.getElementById('display');
+        let buttons = document.querySelectorAll('#buttons button');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', addToDisplay);
+        });
+
+        function addToDisplay(e) {
+            let buttonValue = e.target.innerText;
+
+            if (buttonValue === '=') {
+                calculate();
+            } else {
+                display.innerText += buttonValue;
+            }
+        }
+
+        function calculate() {
+            try {
+                display.innerText = eval(display.innerText);
+            } catch (error) {
+                display.innerText = 'Error';
+            }
+        }
+
+        function clearDisplay() {
+            display.innerText = '';
+        }
+    </script>
+</body>
+
+</html>
